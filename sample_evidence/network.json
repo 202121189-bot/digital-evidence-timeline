@@ -1,0 +1,74 @@
+[
+  {
+    "timestamp": "2026-10-12T08:14:55",
+    "event": "connection",
+    "src_ip": "192.168.1.10",
+    "dst_ip": "185.220.101.5",
+    "dst_port": 22,
+    "protocol": "TCP",
+    "bytes": 2048
+  },
+  {
+    "timestamp": "2026-10-12T08:20:30",
+    "event": "connection",
+    "src_ip": "192.168.1.10",
+    "dst_ip": "185.220.101.5",
+    "dst_port": 22,
+    "protocol": "TCP",
+    "bytes": 4096
+  },
+  {
+    "timestamp": "2026-10-12T08:25:00",
+    "event": "dns_query",
+    "src_ip": "192.168.1.10",
+    "dst_ip": "8.8.8.8",
+    "dst_port": 53,
+    "protocol": "UDP",
+    "bytes": 128
+  },
+  {
+    "timestamp": "2026-10-12T09:35:12",
+    "event": "http_request",
+    "src_ip": "192.168.1.10",
+    "dst_ip": "203.0.113.42",
+    "dst_port": 80,
+    "protocol": "TCP",
+    "bytes": 8192
+  },
+  {
+    "timestamp": "2026-10-12T10:15:00",
+    "event": "connection",
+    "src_ip": "192.168.1.10",
+    "dst_ip": "45.155.205.10",
+    "dst_port": 445,
+    "protocol": "TCP",
+    "bytes": 512
+  },
+  {
+    "timestamp": "2026-10-12T10:32:00",
+    "event": "port_scan",
+    "src_ip": "192.168.1.10",
+    "dst_ip": "10.0.0.20",
+    "dst_port": 22,
+    "protocol": "TCP",
+    "bytes": 0
+  },
+  {
+    "timestamp": "2026-10-12T10:35:00",
+    "event": "connection",
+    "src_ip": "192.168.1.10",
+    "dst_ip": "80.82.77.33",
+    "dst_port": 3389,
+    "protocol": "TCP",
+    "bytes": 2048
+  },
+  {
+    "timestamp": "2026-10-12T11:30:00",
+    "event": "disconnection",
+    "src_ip": "192.168.1.10",
+    "dst_ip": "185.220.101.5",
+    "dst_port": 22,
+    "protocol": "TCP",
+    "bytes": 0
+  }
+]

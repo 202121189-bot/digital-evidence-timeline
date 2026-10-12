@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Digital Evidence Timeline</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    background: #0a0e14; color: #e6edf3;
+    padding: 32px; line-height: 1.6;
+  }
+  .header {
+    border-bottom: 2px solid #1f6feb; padding-bottom: 20px;
+    margin-bottom: 32px;
+  }
+  h1 {
+    color: #58a6ff; font-size: 32px; font-weight: 700;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .subtitle { color: #8b949e; font-size: 14px; margin-top: 8px; }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; margin: 32px 0;
+  }
+  .stat {
+    background: linear-gradient(135deg, #161b22 0%, #1c2128 100%);
+    border: 1px solid #30363d; border-radius: 12px;
+    padding: 24px; position: relative; overflow: hidden;
+  }
+  .stat::before {
+    content: ""; position: absolute; top: 0; left: 0;
+    width: 4px; height: 100%; background: #58a6ff;
+  }
+  .stat.warning::before { background: #f0883e; }
+  .stat.danger::before { background: #da3633; }
+  .stat.success::before { background: #3fb950; }
+  .stat .num {
+    font-size: 36px; font-weight: 800; color: #58a6ff;
+    line-height: 1;
+  }
+  .stat.warning .num { color: #f0883e; }
+  .stat.danger .num { color: #da3633; }
+  .stat.success .num { color: #3fb950; }
+  .stat .label {
+    color: #8b949e; font-size: 12px; text-transform: uppercase;
+    letter-spacing: 1px; margin-top: 8px;
+  }
+
+  h2 {
+    color: #79c0ff; font-size: 20px; margin: 40px 0 16px;
+    padding-left: 16px; border-left: 4px solid #58a6ff;
+  }
+
+  /* Timeline */
+  .timeline { position: relative; padding-left: 40px; }
+  .timeline::before {
+    content: ""; position: absolute; left: 12px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, #58a6ff, #1f6feb);
+  }
+  .event {
+    position: relative; margin-bottom: 20px;
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 10px; padding: 16px 20px;
+    transition: all 0.2s ease;
+  }
+  .event:hover {
+    border-color: #58a6ff;
+    transform: translateX(4px);
+    box-shadow: 0 4px 20px rgba(88, 166, 255, 0.15);
+  }
+  .event::before {
+    content: ""; position: absolute; left: -34px; top: 22px;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: #58a6ff; border: 3px solid #0a0e14;
+    box-shadow: 0 0 0 2px #58a6ff;
+  }
+  .event.suspicious::before {
+    background: #da3633; box-shadow: 0 0 0 2px #da3633,
+                0 0 12px rgba(218, 54, 51, 0.6);
+  }
+  .event.suspicious { border-color: #da3633; }
+
+  .event-header {
+    display: flex; justify-content: space-between;
+    align-items: center; margin-bottom: 10px;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .timestamp {
+    font-family: Consolas, monospace; color: #7ee787;
+    font-size: 13px; font-weight: 600;
+  }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge {
+    display: inline-block; padding: 3px 10px;
+    border-radius: 12px; font-size: 11px;
+    font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .badge-source { background: #1f6feb; color: white; }
+  .badge-fs      { background: #238636; color: white; }
+  .badge-net     { background: #8957e5; color: white; }
+  .badge-user    { background: #d29922; color: #0a0e14; }
+  .badge-warn    { background: #da3633; color: white; }
+
+  .artifact {
+    color: #79c0ff; font-weight: 700; font-size: 15px;
+    word-break: break-all;
+  }
+  .interpretation {
+    color: #c9d1d9; font-size: 14px; margin-top: 6px;
+  }
+  .event-details {
+    margin-top: 10px; padding-top: 10px;
+    border-top: 1px dashed #30363d;
+    font-size: 12px; color: #8b949e;
+    display: flex; gap: 16px; flex-wrap: wrap;
+  }
+
+  .source-breakdown {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+  }
+  .source-item {
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 8px; padding: 14px; text-align: center;
+  }
+  .source-item .name { color: #8b949e; font-size: 12px; }
+  .source-item .count { color: #58a6ff; font-size: 22px; font-weight: 700; }
+
+  .time-range {
+    background: #161b22; border: 1px solid #30363d;
+    border-radius: 10px; padding: 20px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .time-range div span { color: #8b949e; font-size: 12px; display: block; }
+  .time-range div b { color: #7ee787; font-family: Consolas, monospace; font-size: 13px; }
+
+  footer {
+    margin-top: 60px; text-align: center;
+    color: #6e7681; font-size: 12px;
+    border-top: 1px solid #30363d; padding-top: 24px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🕵️ Digital Evidence Timeline</h1>
+  <div class="subtitle">Generated at {{ generated_at }}</div>
+</div>
+
+<!-- Stats -->
+<div class="stats">
+  <div class="stat">
+    <div class="num">{{ summary.total_events }}</div>
+    <div class="label">Total Events</div>
+  </div>
+  <div class="stat {% if summary.suspicious_events > 0 %}danger{% else %}success{% endif %}">
+    <div class="num">{{ summary.suspicious_events }}</div>
+    <div class="label">Suspicious Events</div>
+  </div>
+  {% if summary.time_range %}
+  <div class="stat">
+    <div class="num">{{ summary.time_range.span_hours }}</div>
+    <div class="label">Hours Span</div>
+  </div>
+  {% endif %}
+  <div class="stat">
+    <div class="num">{{ summary.sources | length }}</div>
+    <div class="label">Evidence Sources</div>
+  </div>
+</div>
+
+<!-- Time Range -->
+{% if summary.time_range %}
+<h2>⏱️ Time Range</h2>
+<div class="time-range">
+  <div>
+    <span>START</span>
+    <b>{{ summary.time_range.start }}</b>
+  </div>
+  <div>
+    <span>END</span>
+    <b>{{ summary.time_range.end }}</b>
+  </div>
+  <div>
+    <span>SPAN</span>
+    <b>{{ summary.time_range.span_hours }} hours</b>
+  </div>
+</div>
+{% endif %}
+
+<!-- Sources -->
+<h2>📁 Evidence Sources</h2>
+<div class="source-breakdown">
+  {% for src, count in summary.sources.items() %}
+  <div class="source-item">
+    <div class="name">{{ src }}</div>
+    <div class="count">{{ count }}</div>
+  </div>
+  {% endfor %}
+</div>
+
+<!-- Timeline -->
+<h2>📅 Unified Timeline ({{ events|length }} events)</h2>
+<div class="timeline">
+  {% for e in events %}
+  <div class="event {% if e.details.suspicious %}suspicious{% endif %}">
+    <div class="event-header">
+      <div class="timestamp">🕐 {{ e.timestamp }}</div>
+      <div class="badges">
+        <span class="badge badge-source">{{ e.source }}</span>
+        {% if e.details.suspicious %}
+          <span class="badge badge-warn">⚠ SUSPICIOUS</span>
+        {% endif %}
+      </div>
+    </div>
+    <div class="artifact">📄 {{ e.artifact }}</div>
+    <div class="interpretation">{{ e.interpretation }}</div>
+    {% if e.details %}
+    <div class="event-details">
+      {% for k, v in e.details.items() %}
+        {% if v and k != "suspicious" %}
+          <span><b>{{ k }}:</b> {{ v }}</span>
+        {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+  {% endfor %}
+</div>
+
+<footer>
+  Generated by <b>Digital Evidence Timeline Generator</b> — DFIR Tool<br>
+  {{ generated_at }}
+</footer>
+
+</body>
+</html>

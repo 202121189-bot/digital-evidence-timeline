@@ -1,0 +1,65 @@
+[
+  {
+    "timestamp": "2026-10-12T08:15:01",
+    "user": "admin",
+    "event": "logon",
+    "session_id": "S-1-5-21-1000",
+    "computer": "WORKSTATION01"
+  },
+  {
+    "timestamp": "2026-10-12T08:30:00",
+    "user": "admin",
+    "event": "privilege_use",
+    "session_id": "S-1-5-21-1000",
+    "computer": "WORKSTATION01"
+  },
+  {
+    "timestamp": "2026-10-12T09:00:00",
+    "user": "deploy",
+    "event": "session_start",
+    "session_id": "S-1-5-21-2000",
+    "computer": "SERVER01"
+  },
+  {
+    "timestamp": "2026-10-12T09:45:00",
+    "user": "backdoor_user",
+    "event": "logon",
+    "session_id": "S-1-5-21-9999",
+    "computer": "WORKSTATION01"
+  },
+  {
+    "timestamp": "2026-10-12T09:50:00",
+    "user": "backdoor_user",
+    "event": "privilege_use",
+    "session_id": "S-1-5-21-9999",
+    "computer": "WORKSTATION01"
+  },
+  {
+    "timestamp": "2026-10-12T10:00:00",
+    "user": "admin",
+    "event": "password_change",
+    "session_id": "S-1-5-21-1000",
+    "computer": "WORKSTATION01"
+  },
+  {
+    "timestamp": "2026-10-12T10:30:00",
+    "user": "guest",
+    "event": "account_locked",
+    "session_id": "",
+    "computer": "SERVER01"
+  },
+  {
+    "timestamp": "2026-10-12T11:00:00",
+    "user": "deploy",
+    "event": "session_end",
+    "session_id": "S-1-5-21-2000",
+    "computer": "SERVER01"
+  },
+  {
+    "timestamp": "2026-10-12T11:15:00",
+    "user": "admin",
+    "event": "logoff",
+    "session_id": "S-1-5-21-1000",
+    "computer": "WORKSTATION01"
+  }
+]

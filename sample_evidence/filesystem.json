@@ -1,0 +1,44 @@
+[
+  {
+    "path": "C:/Windows/System32/cmd.exe",
+    "event": "modified",
+    "timestamp": "2026-10-12T08:10:05",
+    "size": 289792,
+    "hash": "a1b2c3d4e5f6..."
+  },
+  {
+    "path": "C:/Users/admin/Documents/passwords.txt",
+    "event": "accessed",
+    "timestamp": "2026-10-12T08:12:30",
+    "size": 2048,
+    "hash": "f9e8d7c6b5a4..."
+  },
+  {
+    "path": "C:/Temp/update.bat",
+    "event": "created",
+    "timestamp": "2026-10-12T08:14:00",
+    "size": 512,
+    "hash": "112233445566..."
+  },
+  {
+    "path": "C:/Users/admin/Desktop/backup.zip",
+    "event": "deleted",
+    "timestamp": "2026-10-12T09:30:00",
+    "size": 0,
+    "hash": ""
+  },
+  {
+    "path": "C:/Program Files/App/config.ini",
+    "event": "modified",
+    "timestamp": "2026-10-12T10:05:15",
+    "size": 1024,
+    "hash": "abcdef123456..."
+  },
+  {
+    "path": "C:/Temp/malware.exe",
+    "event": "created",
+    "timestamp": "2026-10-12T10:30:45",
+    "size": 156789,
+    "hash": "deadbeefcafe..."
+  }
+]
